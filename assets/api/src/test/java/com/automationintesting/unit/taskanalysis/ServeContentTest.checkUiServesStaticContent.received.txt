@@ -1,0 +1,7 @@
+{
+    "timestamp": "2020-10-28T16:16:24.886+00:00",
+    "status": 404,
+    "error": "Not Found",
+    "message": "",
+    "path": "/"
+}

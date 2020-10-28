@@ -5,6 +5,7 @@ import com.automationintesting.model.room.*;
 import com.automationintesting.requests.BookingRequests;
 import com.automationintesting.requests.RoomRequests;
 import com.automationintesting.service.ReportService;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -38,10 +39,12 @@ public class ReportServiceTest {
         Room roomOne = new Room(1, 101, "Single", 1, true, "Wifi");
         Room roomTwo = new Room(2, 102, "Double", 2, true, "Mini-bar");
 
-        Rooms sampleRooms = new Rooms(new ArrayList<Room>(){{
-            this.add(roomOne);
-            this.add(roomTwo);
-        }});
+        Rooms sampleRooms = new Rooms(new ArrayList<Room>() {
+            {
+                this.add(roomOne);
+                this.add(roomTwo);
+            }
+        });
 
         Calendar startDate = new GregorianCalendar(2019, Calendar.SEPTEMBER, 1);
         Calendar endDate = new GregorianCalendar(2019, Calendar.SEPTEMBER, 2);
@@ -50,13 +53,17 @@ public class ReportServiceTest {
         Booking bookingOne = new Booking(1, 1, "Mark", "Dean", true, bookingDates);
         Booking bookingTwo = new Booking(2, 2, "James", "Jones", true, bookingDates);
 
-        Bookings bookingsOne = new Bookings(new ArrayList<Booking>(){{
-            this.add(bookingOne);
-        }});
+        Bookings bookingsOne = new Bookings(new ArrayList<Booking>() {
+            {
+                this.add(bookingOne);
+            }
+        });
 
-        Bookings bookingsTwo = new Bookings(new ArrayList<Booking>(){{
-            this.add(bookingTwo);
-        }});
+        Bookings bookingsTwo = new Bookings(new ArrayList<Booking>() {
+            {
+                this.add(bookingTwo);
+            }
+        });
 
         when(roomRequests.searchForRooms()).thenReturn(sampleRooms);
         when(bookingRequests.getBookings(1)).thenReturn(bookingsOne);
@@ -64,17 +71,18 @@ public class ReportServiceTest {
     }
 
     @Test
-    public void getAllRoomReportTest(){
+    public void getAllRoomReportTest() {
         Report report = reportService.getAllRoomsReport();
 
-        assertEquals(report.toString(), "Report{report=[Entry{start=2019-09-01, end=2019-09-02, title='Mark Dean - Room: 101'}, Entry{start=2019-09-01, end=2019-09-02, title='James Jones - Room: 102'}]}");
+        assertEquals(report.toString(),
+                "Report{report=[Entry{start=2019-09-01, end=2019-09-02, title='Mark Dean - Room: 101'}, Entry{start=2019-09-01, end=2019-09-02, title='James Jones - Room: 102'}]}");
     }
 
     @Test
-    public void getSpecificRoomReportTest(){
+    public void getSpecificRoomReportTest() {
         Report report = reportService.getSpecificRoomReport(1);
 
-        assertEquals(report.toString(), "Report{report=[Entry{start=2019-09-01, end=2019-09-02, title='Unavailable'}]}");
+        assertEquals(report.toString(),
+                "Report{report=[Entry{start=2019-09-01, end=2019-09-02, title='Unavailable'}]}");
     }
-
 }
