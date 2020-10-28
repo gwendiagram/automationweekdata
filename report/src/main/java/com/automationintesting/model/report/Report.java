@@ -23,8 +23,6 @@ public class Report {
 
     @Override
     public String toString() {
-        return "Report{" +
-                "report=" + report +
-                '}';
+        return "Report{" + "report=" + report + '}';
     }
 }
